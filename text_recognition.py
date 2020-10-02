@@ -1,7 +1,8 @@
 # imports
-import cv2
-import numpy as np
+
 import pytesseract
+import numpy as np
+import cv2
 from imutils.object_detection import non_max_suppression
 
 
@@ -52,8 +53,8 @@ class Program:
         data = dict()
         data['status'] = False
         try:
-            # load the input image and grab the image dimensions
-            image = cv2.imread(self.args["image"])
+      
+            image = cv2.imread(self.args["image"])		# reading the image
             data["orig"] = image.copy()
             (data["origH"], data["origW"]) = image.shape[:2]
 
@@ -200,13 +201,14 @@ class Program:
 
             # loop over the number of columns
             for x in range(0, numCols):
+  		# ignore it
                 # if our score does not have sufficient probability,
-                # ignore it
+             
                 if scoresData[x] < self.args["min-confidence"]:
                     continue
-
+		# maps will be 4x smaller than the input image
                 # compute the offset factor as our resulting feature
-                # maps will be 4x smaller than the input image
+          
                 (offsetX, offsetY) = (x * 4.0, y * 4.0)
 
                 # extract the rotation angle for the prediction and
